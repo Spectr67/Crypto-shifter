@@ -3,7 +3,7 @@ const elButtonSetUSD = document.querySelector('.field_button > input')
 elButtonSetUSD.onclick = onClickSetUSD
 
 function onClickSetUSD() {
-  renderInputTextBTC(1000)
+  handleUserBTC(btcObj.value, btcObj.maxValue)
 }
 
 function renderInputTextBTC(value) {
@@ -24,4 +24,32 @@ function renderBTC(value, max) {
   renderProgress(value, max)
 }
 
-function renderBTCMinusButton() {}
+const elButtonMinus = document.querySelector(
+  'button[ctrl="btc"][action="minus"]'
+)
+elButtonMinus.onclick = onclickBTCMinusButton
+
+function onclickBTCMinusButton(value, max) {
+  let minus = 1
+  value = value - minus
+  renderBTC(value, max)
+}
+
+const elButtonPlus = document.querySelector('button[ctrl="btc"][action="plus"]')
+elButtonPlus.onclick = onclickBTCPlusButton
+
+function onclickBTCPlusButton(e) {
+  let value = document.querySelector('input[ctrl="btc"]').textContent
+  renderBTC(value, max)
+}
+
+const elRangeInput = document.querySelector(
+  'input[type="range"][ctrl="btc"][name="btc"]'
+)
+elRangeInput.onchange = onChangeRangeInputBTC
+
+function onChangeRangeInputBTC(e) {
+  let value = e.target.value
+  let max = e.target.max
+  renderBTC(value, max)
+}
