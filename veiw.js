@@ -1,13 +1,18 @@
 const elInputTotalBalance = document.querySelector('#total_balance')
 const elButtonSetUSD = document.querySelector('.field_button > input')
-elButtonSetUSD.onclick = onClickSetUSD
+const elButtonMinus = document.querySelector('[ctrl="btc"][action="minus"]')
+const elButtonPlus = document.querySelector('[ctrl="btc"][action="plus"]')
+const elRangeInput = document.querySelector('input[type="range"][ctrl="btc"]')
+const elInputTextBTC = document.querySelector('[type="text"][ctrl="btc"]')
 
-function onClickSetUSD() {
-  handleUserBTC(btcObj.value, btcObj.maxValue)
-}
+elInputTextBTC.oninput = onInputInputText
+elRangeInput.oninput = onChangeRangeInputBTC
+elButtonPlus.onclick = onClickBTCPlusButton
+elButtonMinus.onclick = onClickBTCMinusButton
+elButtonSetUSD.onclick = onClickSetTotalUSD
 
 function renderInputTextBTC(value) {
-  const elInputText = document.querySelector('.row > input[ctrl="btc"]')
+  const elInputText = document.querySelector('[type="text"][ctrl="btc"]')
   elInputText.value = value
 }
 
@@ -19,34 +24,38 @@ function renderProgress(value, max) {
   })
 }
 
+function renderInputRange(value, max) {
+  const elRange = document.querySelector('[type="range"][ctrl="btc"]')
+  elRange.max = max
+  elRange.value = value
+}
+
 function renderBTC(value, max) {
   renderInputTextBTC(value)
+  renderInputRange(value, max)
   renderProgress(value, max)
 }
 
-const elButtonMinus = document.querySelector(
-  'button[ctrl="btc"][action="minus"]'
-)
-elButtonMinus.onclick = onclickBTCMinusButton
-
-function onclickBTCMinusButton(value, max) {
-  let minus = 1
-  value = value - minus
-  renderBTC(value, max)
+function onClickSetTotalUSD() {
+  const elInputTotalBalance = document.querySelector('#total_balance')
+  const total = elInputTotalBalance.value
+  handleSetTotalUSD(total)
 }
 
-const elButtonPlus = document.querySelector('button[ctrl="btc"][action="plus"]')
-elButtonPlus.onclick = onclickBTCPlusButton
-
-function onclickBTCPlusButton(e) {
-  let value = document.querySelector('input[ctrl="btc"]').textContent
-  renderBTC(value, max)
+function onInputInputText(e) {
+  const value = +e.target.value
+  renderBTC(value, 1000)
 }
 
-const elRangeInput = document.querySelector(
-  'input[type="range"][ctrl="btc"][name="btc"]'
-)
-elRangeInput.onchange = onChangeRangeInputBTC
+function onClickBTCMinusButton() {
+  let value = +document.querySelector('[type="text"][ctrl="btc"]').value
+  renderBTC(value - 1, 1000)
+}
+
+function onClickBTCPlusButton() {
+  let value = +document.querySelector('[type="text"][ctrl="btc"]').value
+  renderBTC(value + 1, 1000)
+}
 
 function onChangeRangeInputBTC(e) {
   let value = e.target.value

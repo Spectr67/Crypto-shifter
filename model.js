@@ -2,19 +2,21 @@ let totalUSD = 0
 
 const btcObj = {
   value: 0,
-  minValue: 0,
-  maxValue: 100,
+  max: 100,
 
-  valueMinus() {
+  minusOne() {
     this.value -= 1
   },
-  valuePlus() {
+
+  plusOne() {
     this.value += 1
   },
-  changeValue(value) {
+
+  setValue(value) {
     this.value = value
   },
-  setMaxValue(max) {
-    this.maxValue = max
+
+  setMax(max) {
+    this.max = max
   },
 }

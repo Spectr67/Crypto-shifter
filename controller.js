@@ -1,5 +1,4 @@
-function handleUserBTC(value, max) {
-  btcObj.changeValue(value)
-  btcObj.setMaxValue(max)
-  renderBTC(value, max)
+function handleSetTotalUSD(max) {
+  btcObj.setMax(max)
+  renderBTC(btcObj.value, btcObj.max)
 }
