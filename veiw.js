@@ -43,22 +43,17 @@ function onClickSetTotalUSD() {
 }
 
 function onInputInputText(e) {
-  const value = +e.target.value
-  renderBTC(value, 1000)
+  handleInputInputUsd(value)
 }
 
 function onClickBTCMinusButton() {
-  let value = +document.querySelector('[type="text"][ctrl="btc"]').value
-  renderBTC(value - 1, 1000)
+  handleBTCMinusButton(value)
 }
 
 function onClickBTCPlusButton() {
-  let value = +document.querySelector('[type="text"][ctrl="btc"]').value
-  renderBTC(value + 1, 1000)
+  handleBTCPlusButton(value)
 }
 
 function onChangeRangeInputBTC(e) {
-  let value = e.target.value
-  let max = e.target.max
-  renderBTC(value, max)
+  handleRangeInputBTC()
 }
