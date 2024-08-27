@@ -5,19 +5,19 @@ function handleSetTotalUSD(max) {
 
 function handleInputInputUsd(value) {
   btcObj.setValue(value)
-  renderBTC(value, max)
+  renderBTC(btcObj.value, btcObj.max)
 }
 
 function handleBTCMinusButton() {
-  btcObj.minusOne
-  renderBTC(value, max)
+  btcObj.minusOne()
+  renderBTC(btcObj.value, btcObj.max)
 }
 
 function handleBTCPlusButton() {
-  btcObj.plusOne
-  renderBTC(value, max)
+  btcObj.plusOne()
+  renderBTC(btcObj.value, btcObj.max)
 }
-function handleRangeInputBTC() {
-  setValue(value)
-  renderBTC(value, max)
+function handleRangeInputBTC(value) {
+  btcObj.setValue(value)
+  renderBTC(btcObj.value, btcObj.max)
 }

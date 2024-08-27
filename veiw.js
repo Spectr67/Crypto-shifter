@@ -33,6 +33,8 @@ function renderInputRange(value, max) {
 function renderBTC(value, max) {
   renderInputTextBTC(value)
   renderInputRange(value, max)
+  console.log(value)
+  console.log('value render')
   renderProgress(value, max)
 }
 
@@ -43,17 +45,18 @@ function onClickSetTotalUSD() {
 }
 
 function onInputInputText(e) {
+  const value = e.target.value
   handleInputInputUsd(value)
 }
 
 function onClickBTCMinusButton() {
-  handleBTCMinusButton(value)
+  handleBTCMinusButton()
 }
 
 function onClickBTCPlusButton() {
-  handleBTCPlusButton(value)
+  handleBTCPlusButton()
 }
 
 function onChangeRangeInputBTC(e) {
-  handleRangeInputBTC()
+  handleRangeInputBTC(e.target.value)
 }
