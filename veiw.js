@@ -33,19 +33,17 @@ function renderInputRange(value, max) {
 function renderBTC(value, max) {
   renderInputTextBTC(value)
   renderInputRange(value, max)
-  console.log(value)
-  console.log('value render')
   renderProgress(value, max)
 }
 
 function onClickSetTotalUSD() {
   const elInputTotalBalance = document.querySelector('#total_balance')
-  const total = elInputTotalBalance.value
+  const total = parseInt(elInputTotalBalance.value)
   handleSetTotalUSD(total)
 }
 
 function onInputInputText(e) {
-  const value = e.target.value
+  const value = parseInt(e.target.value)
   handleInputInputUsd(value)
 }
 
@@ -58,5 +56,6 @@ function onClickBTCPlusButton() {
 }
 
 function onChangeRangeInputBTC(e) {
-  handleRangeInputBTC(e.target.value)
+  const value = parseInt(e.target.value)
+  handleRangeInputBTC(value)
 }
