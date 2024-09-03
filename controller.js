@@ -1,22 +1,22 @@
-function handleSetTotalUSD(max) {
+function handleSetTotalUSD(total) {
+  cryptos.setTotal(total)
   Object.keys(cryptos).forEach(crypto => {
-    cryptos[crypto].setMax(max)
     renderCrypto(cryptos[crypto].value, cryptos[crypto].max, crypto)
   })
 }
 function handleInputInputUsd(value, crypto) {
-  cryptos[crypto].setValue(value)
+  cryptos.setValue(value, crypto)
   renderCrypto(cryptos[crypto].value, cryptos[crypto].max, crypto)
 }
 function handleMinusButton(crypto) {
-  cryptos[crypto].minusOne()
+  cryptos.minusOne(crypto)
   renderCrypto(cryptos[crypto].value, cryptos[crypto].max, crypto)
 }
 function handlePlusButton(crypto) {
-  cryptos[crypto].plusOne()
+  cryptos.plusOne(crypto)
   renderCrypto(cryptos[crypto].value, cryptos[crypto].max, crypto)
 }
 function handleRangeInput(value, crypto) {
-  cryptos[crypto].setValue(value)
+  cryptos.setValue(value, crypto)
   renderCrypto(cryptos[crypto].value, cryptos[crypto].max, crypto)
 }
