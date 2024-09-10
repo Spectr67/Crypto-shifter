@@ -14,8 +14,12 @@
           <label for="total_balance">Total USD</label>
           <input type="text" name="input" id="total_balance" />
         </div>
+
         <div class="field_button">
           <input type="button" value="Set USD" />
+          <select id="cryptoSelect">
+            <option value="">Select a cryptocurrency</option>
+          </select>
         </div>
         <hr />
       </div>
@@ -102,7 +106,8 @@
       </div>
     </div>
   </body>
-  <script src="model2.js"></script>
+  <script src="model.js"></script>
   <script src="controller.js"></script>
+  <script src="cryptoData.js"></script>
   <script src="veiw.js"></script>
 </html>

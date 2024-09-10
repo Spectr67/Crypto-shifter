@@ -1,47 +1,30 @@
 const elButtonSetUSD = document.querySelector('.field_button > input')
-
 const listInputTexts = document.querySelectorAll('.shifter [type="text"]')
-
-// const elInputTextBTC = document.querySelector('[type="text"][ctrl="btc"]')
-// const elInputTextETH = document.querySelector('[type="text"][ctrl="etc"]')
-// const elInputTextLTC = document.querySelector('[type="text"][ctrl="ltc"]')
-// const elInputTextDOGE = document.querySelector('[type="text"][ctrl="doge"]')
-const elButtonMinusBTC = document.querySelector('[ctrl="btc"][action="minus"]')
-const elButtonMinusETH = document.querySelector('[ctrl="etc"][action="minus"]')
-const elButtonMinusLTC = document.querySelector('[ctrl="ltc"][action="minus"]')
-const elButtonMinusDOGE = document.querySelector(
-  '[ctrl="doge"][action="minus"]'
-)
-const elButtonPlusBTC = document.querySelector('[ctrl="btc"][action="plus"]')
-const elButtonPlusETH = document.querySelector('[ctrl="etc"][action="plus"]')
-const elButtonPlusLTC = document.querySelector('[ctrl="ltc"][action="plus"]')
-const elButtonPlusDOGE = document.querySelector('[ctrl="doge"][action="plus"]')
-
-const elRangeInputBTC = document.querySelector('[type="range"][ctrl="btc"]')
-const elRangeInputETH = document.querySelector('[type="range"][ctrl="etc"]')
-const elRangeInputLTC = document.querySelector('[type="range"][ctrl="ltc"]')
-const elRangeInputDOGE = document.querySelector('[type="range"][ctrl="doge"]')
+const elButtonMinusAll = document.querySelectorAll('[action="minus"]')
+const elButtonPlusAll = document.querySelectorAll('[action="plus"]')
+const elInputTextAll = document.querySelectorAll('[type="text"]')
+const elRangeInputAll = document.querySelectorAll('[type="range"]')
 
 listInputTexts.forEach(elInputText => {
   elInputText.oninput = onInputInputText
 })
 
-// elInputTextBTC.oninput = onInputInputText
-// elInputTextETH.oninput = onInputInputText
-// elInputTextLTC.oninput = onInputInputText
-// elInputTextDOGE.oninput = onInputInputText
-elRangeInputBTC.oninput = onChangeRangeInput
-elRangeInputETH.oninput = onChangeRangeInput
-elRangeInputLTC.oninput = onChangeRangeInput
-elRangeInputDOGE.oninput = onChangeRangeInput
-elButtonPlusBTC.onclick = onClickPlusButton
-elButtonPlusETH.onclick = onClickPlusButton
-elButtonPlusLTC.onclick = onClickPlusButton
-elButtonPlusDOGE.onclick = onClickPlusButton
-elButtonMinusBTC.onclick = onClickMinusButton
-elButtonMinusETH.onclick = onClickMinusButton
-elButtonMinusLTC.onclick = onClickMinusButton
-elButtonMinusDOGE.onclick = onClickMinusButton
+elButtonPlusAll.forEach(button => {
+  button.onclick = onClickPlusButton
+})
+
+elButtonMinusAll.forEach(button => {
+  button.onclick = onClickMinusButton
+})
+
+elInputTextAll.forEach(input => {
+  input.oninput = onInputInputText
+})
+
+elRangeInputAll.forEach(input => {
+  input.oninput = onChangeRangeInput
+})
+
 elButtonSetUSD.onclick = onClickSetTotalUSD
 
 function onClickSetTotalUSD() {
@@ -95,4 +78,93 @@ function renderInputRange(value, max, crypto) {
   const elRange = document.querySelector(`[type="range"][ctrl="${crypto}"]`)
   elRange.max = max
   elRange.value = value
+}
+
+////////////////////////////
+function generateShifter(cryptoName) {
+  const elDivShifter = document.createElement('div')
+  const elLabel = document.createElement('label')
+  const elProgressTop = document.createElement('progress')
+  const elDivRow = document.createElement('div')
+  const elButtonMinus = document.createElement('button')
+  const elInput = document.createElement('input')
+  const elButtonPlus = document.createElement('button')
+  const elProgressBot = document.createElement('progress')
+  const elInputRange = document.createElement('input')
+  const elButtonDelete = document.createElement('button')
+
+  elDivShifter.setAttribute('class', 'shifter')
+
+  elLabel.setAttribute('for', `edit-${cryptoName}`)
+  elLabel.textContent = `USD to ${cryptoName}`
+
+  elProgressTop.setAttribute('ctrl', cryptoName)
+  elProgressTop.setAttribute('max', '1000')
+  elProgressTop.setAttribute('value', '0')
+
+  elDivRow.setAttribute('class', 'row')
+
+  elButtonMinus.setAttribute('ctrl', cryptoName)
+  elButtonMinus.setAttribute('action', 'minus')
+  elButtonMinus.innerHTML = '&lt;'
+
+  elInput.setAttribute('type', 'text')
+  elInput.setAttribute('ctrl', cryptoName)
+  elInput.setAttribute('name', `edit-${cryptoName}`)
+  elInput.setAttribute('id', `edit-${cryptoName}`)
+
+  elButtonPlus.setAttribute('ctrl', cryptoName)
+  elButtonPlus.setAttribute('action', 'plus')
+  elButtonPlus.innerHTML = '&gt;'
+
+  elProgressBot.setAttribute('ctrl', cryptoName)
+  elProgressBot.setAttribute('max', '1000')
+  elProgressBot.setAttribute('value', '0')
+
+  elInputRange.setAttribute('type', 'range')
+  elInputRange.setAttribute('ctrl', cryptoName)
+  elInputRange.setAttribute('name', cryptoName)
+  elInputRange.setAttribute('min', '0')
+  elInputRange.setAttribute('max', '1000')
+  elInputRange.setAttribute('value', '0')
+
+  elButtonDelete.setAttribute('ctrl', cryptoName)
+  elButtonDelete.setAttribute('action', 'delete')
+  elButtonDelete.textContent = 'Delete'
+
+  elButtonDelete.onclick = e => handleRemoveShifter(e, cryptoName)
+
+  elDivShifter.appendChild(elLabel)
+  elDivShifter.appendChild(elProgressTop)
+  elDivShifter.appendChild(elDivRow)
+  elDivRow.appendChild(elButtonMinus)
+  elDivRow.appendChild(elInput)
+  elDivRow.appendChild(elButtonPlus)
+  elDivShifter.appendChild(elProgressBot)
+  elDivShifter.appendChild(elInputRange)
+  elDivShifter.appendChild(elButtonDelete)
+
+  return elDivShifter
+}
+
+function renderCryptoShifter(cryptoName) {
+  const elDivShifter = generateShifter(cryptoName)
+  const elDivBotPave = document.querySelector('div.bottom.pave')
+  elDivBotPave.appendChild(elDivShifter)
+}
+
+function renderCryptoShifterDelite(e) {
+  const elDivShifter = e.target.parentElement
+  elDivShifter.remove()
+}
+/////////////////////
+
+function renderCryptoSelect(cryptos) {
+  const select = document.getElementById('cryptoSelect')
+  cryptos.forEach(crypto => {
+    const option = document.createElement('option')
+    option.value = crypto.id
+    option.text = `${crypto.name} (${crypto.symbol.toUpperCase()})`
+    select.appendChild(option)
+  })
 }

@@ -1,117 +1,84 @@
 let totalUSD = 0
 
 const cryptos = {
-  btc: {
-    value: 0,
-    max: 100,
-    min: 0,
-
-    minusOne() {
-      if (this.value > 0) {
-        this.value -= 1
-      }
+  coins: {
+    btc: {
+      value: 0,
+      max: 100,
+      min: 0,
     },
-
-    plusOne() {
-      this.value += 1
+    etc: {
+      value: 0,
+      max: 100,
+      min: 0,
     },
-
-    setValue(value) {
-      if (value !== '' && !isNaN(value)) {
-        this.value = parseInt(value, 10)
-      } else {
-        this.value = 0
-      }
+    ltc: {
+      value: 0,
+      max: 100,
+      min: 0,
     },
-
-    setMax(max) {
-      this.max = max
+    doge: {
+      value: 0,
+      max: 100,
+      min: 0,
     },
   },
-  etc: {
-    value: 0,
-    max: 100,
-    min: 0,
-
-    minusOne() {
-      if (this.value > 0) {
-        this.value -= 1
-      }
-    },
-
-    plusOne() {
-      this.value += 1
-    },
-
-    setValue(value) {
-      if (value !== '' && !isNaN(value)) {
-        this.value = parseInt(value, 10)
-      } else {
-        this.value = 0
-      }
-    },
-
-    setMax(max) {
-      this.max = max
-    },
+  setTotal(total) {
+    Object.keys(this.coins).forEach(crypto => {
+      this.coins[crypto].value = 0
+      this.setMax(total, crypto)
+    })
   },
-  ltc: {
-    value: 0,
-    max: 100,
-    min: 0,
 
-    minusOne() {
-      if (this.value > 0) {
-        this.value -= 1
-      }
-    },
-
-    plusOne() {
-      this.value += 1
-    },
-
-    setValue(value) {
-      if (value !== '' && !isNaN(value)) {
-        this.value = parseInt(value, 10)
-      } else {
-        this.value = 0
-      }
-    },
-
-    setMax(max) {
-      this.max = max
-    },
+  minusOne(crypto) {
+    if (this.coins[crypto].value > this.coins[crypto].min) {
+      this.coins[crypto].value -= 1
+    }
   },
-  doge: {
-    value: 0,
-    max: 100,
-    min: 0,
 
-    minusOne() {
-      if (this.value > 0) {
-        this.value -= 1
-      }
-    },
-
-    plusOne() {
-      this.value += 1
-    },
-
-    setValue(value) {
-      if (value !== '' && !isNaN(value)) {
-        this.value = parseInt(value, 10)
-      } else {
-        this.value = 0
-      }
-    },
-
-    setMax(max) {
-      this.max = max
-    },
+  plusOne(crypto) {
+    if (this.coins[crypto].value < this.coins[crypto].max) {
+      this.coins[crypto].value += 1
+    }
   },
-}
 
-function magic(totalUSD) {
-  btcObj.setMax(totalUSD)
-  ethObj.setMax()
+  setValue(value, crypto) {
+    let sumVal = 0
+    if (value > this.coins[crypto].max) return
+    this.coins[crypto].value = value
+
+    for (const item in this.coins) {
+      sumVal += this.coins[item].value
+    }
+
+    for (const item in this.coins) {
+      if (item === crypto) continue
+      this.coins[item].max = totalUSD - sumVal + this.coins[item].value
+    }
+  },
+
+  setMax(max, crypto) {
+    this.coins[crypto].max = max
+  },
+
+  createCypto(value = 0, max = 0, min = 0) {
+    return { value, max, min }
+  },
+
+  addCrypto(name, value = 0, max = 100, min = 0) {
+    if (!this.coins[name]) {
+      this.coins[name] = this.createCrypto(value, max, min)
+    }
+  },
+
+  removeCrypto(crypto) {
+    if (this.coins[crypto]) {
+      delete this.coins[crypto]
+    }
+  },
+
+  dividedCrypto(crypto, cur) {
+    let resultCur = this.coins[crypto].value / cur
+    return resultCur
+  },
 }
