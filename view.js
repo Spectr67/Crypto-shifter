@@ -1,28 +1,23 @@
 const elButtonSetUSD = document.querySelector('.field_button > input')
 const listInputTexts = document.querySelectorAll('.shifter [type="text"]')
-const elButtonMinusAll = document.querySelectorAll('[action="minus"]')
-const elButtonPlusAll = document.querySelectorAll('[action="plus"]')
-const elInputTextAll = document.querySelectorAll('[type="text"]')
-const elRangeInputAll = document.querySelectorAll('[type="range"]')
+const listButtonsMinus = document.querySelectorAll('.shifter [action="minus"]')
+const listButtonsPlus = document.querySelectorAll('.shifter [action="plus"]')
+const listRangeInput = document.querySelectorAll('.shifter [type="range"]')
 
 listInputTexts.forEach(elInputText => {
   elInputText.oninput = onInputInputText
 })
 
-elButtonPlusAll.forEach(button => {
-  button.onclick = onClickPlusButton
+listButtonsPlus.forEach(elButton => {
+  elButton.onclick = onClickPlusButton
 })
 
-elButtonMinusAll.forEach(button => {
-  button.onclick = onClickMinusButton
+listButtonsMinus.forEach(elButton => {
+  elButton.onclick = onClickMinusButton
 })
 
-elInputTextAll.forEach(input => {
-  input.oninput = onInputInputText
-})
-
-elRangeInputAll.forEach(input => {
-  input.oninput = onChangeRangeInput
+listRangeInput.forEach(elInputRange => {
+  elInputRange.oninput = onChangeRangeInput
 })
 
 elButtonSetUSD.onclick = onClickSetTotalUSD
@@ -148,8 +143,8 @@ function generateShifter(cryptoName) {
 }
 
 function renderCryptoShifter(cryptoName) {
-  const elDivShifter = generateShifter(cryptoName)
   const elDivBotPave = document.querySelector('div.bottom.pave')
+  const elDivShifter = generateShifter(cryptoName)
   elDivBotPave.appendChild(elDivShifter)
 }
 
@@ -159,12 +154,17 @@ function renderCryptoShifterDelite(e) {
 }
 /////////////////////
 
+// cryptos = ['btc', 'ltc']
 function renderCryptoSelect(cryptos) {
-  const select = document.getElementById('cryptoSelect')
-  cryptos.forEach(crypto => {
-    const option = document.createElement('option')
-    option.value = crypto.id
-    option.text = `${crypto.name} (${crypto.symbol.toUpperCase()})`
-    select.appendChild(option)
+  const elSelect = document.querySelector('#cryptoSelect')
+  cryptos.forEach(cryptoName => {
+    const elOption = generateOption(cryptoName)
+    elSelect.appendChild(elOption)
   })
+}
+
+function generateOption(cryptoName) {
+  const elOption = document.createElement('option')
+  elOption.value = cryptoName.toLowerCase()
+  elOption.textContent = cryptoName.toUpperCase()
 }

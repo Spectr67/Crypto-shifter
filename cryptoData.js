@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', initCryptoDropdown)
+// document.addEventListener('DOMContentLoaded', initCryptoDropdown)
 
 async function fetchCryptoCur(crypto) {
   const API = `https://min-api.cryptocompare.com/data/price?fsym=${crypto}&tsyms=USD`

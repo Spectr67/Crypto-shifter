@@ -1,25 +1,25 @@
 const cryptos = {
-  totalUSD: 100,
+  totalUSD: 0,
   coins: {
     btc: {
       tokens: 0,
       value: 0,
-      max: 100,
+      max: 0,
     },
     etc: {
       tokens: 0,
       value: 0,
-      max: 100,
+      max: 0,
     },
     ltc: {
       tokens: 0,
       value: 0,
-      max: 100,
+      max: 0,
     },
     doge: {
       tokens: 0,
       value: 0,
-      max: 100,
+      max: 0,
     },
   },
 

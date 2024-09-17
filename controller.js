@@ -17,10 +17,8 @@ function handlePlusButton(crypto) {
   renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
 }
 function handleRangeInput(value, crypto) {
-  if (value <= cryptos.coins[crypto].max) {
-    cryptos.setValue(value, crypto)
-    renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
-  }
+  cryptos.setValue(value, crypto)
+  renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
 }
 function handleRemoveShifter(e, crypto) {
   renderCryptoShifterDelite(e)
