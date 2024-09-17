@@ -22,3 +22,14 @@ function handleRangeInput(value, crypto) {
     renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
   }
 }
+function handleRemoveShifter(e, crypto) {
+  renderCryptoShifterDelite(e)
+  cryptos.removeCrypto(crypto)
+}
+function handleCryptoSelect(e) {
+  const cryptoName = e.target.options[e.target.selectedIndex].text
+  if (cryptoName) {
+    renderCryptoShifter(cryptoName)
+    cryptos.addCrypto(cryptoName)
+  }
+}

@@ -64,28 +64,33 @@ const cryptos = {
     this.coins[crypto].max = max
   },
 
+  setNotMe(crypto) {
+    const notMe = Object.keys(this.coins).find(key => key !== crypto)
+    this.setValue(this.getValue(notMe), notMe)
+  },
+
   addCrypto(crypto) {
     if (!this.coins[crypto]) {
       this.coins[crypto] = { value: 0, max: 0 }
     }
-    const notMe = Object.keys(this.coins).find(key => key !== crypto)
-    this.setValue(this.getValue(notMe), notMe)
+    this.setNotMe()
   },
 
   removeCrypto(crypto) {
     if (this.coins[crypto]) {
       delete this.coins[crypto]
     }
-    const notMe = Object.keys(this.coins).find(key => key !== crypto)
-    this.setValue(this.getValue(notMe), notMe)
+    this.setNotMe()
   },
 
-  // dividedCrypto - ужасное название
-  dividedCrypto(crypto, cur) {
-    let resultCur = this.coins[crypto].value / cur
-    return resultCur
+  calcTokens(crypto, cur) {
+    this.coins[crypto].tokens = cur / this.coins[crypto].value
   },
 }
+// cryptos.setMax(40000,"btc")
+// cryptos.setValue(40000, 'btc')
+// cryptos.calcTokens("btc", 56000)
+// console.log(cryptos.coins.btc)
 
 // // console.log(cryptos.coins)
 
