@@ -154,9 +154,9 @@ function renderCryptoShifterDelite(e) {
 }
 /////////////////////
 
-// cryptos = ['btc', 'ltc']
 function renderCryptoDatalist(cryptos) {
-  const elDatalist = document.querySelector('#cryptosList')
+  const elDatalist = document.querySelector('#newshifter')
+  console.log(elDatalist)
   cryptos.forEach(cryptoName => {
     const elOption = generateOption(cryptoName)
     elDatalist.appendChild(elOption)
