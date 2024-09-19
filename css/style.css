@@ -50,7 +50,6 @@ html {
   text-align: left;
 }
 
-
 .main {
   min-width: 300px;
 }
@@ -73,8 +72,6 @@ html {
   text-align: center;
 }
 
-
-
 .shifter {
   width: 200px;
   margin: 5px;
@@ -84,8 +81,6 @@ html {
   color: var(--clr-white);
   user-select: none;
 }
-
-
 
 .shifter > div {
   background-color: var(--clr-slave);
@@ -101,7 +96,7 @@ html {
   writing-mode: unset;
   appearance: none;
   -moz-appearance: none;
-	-webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 .shifter input,
@@ -109,7 +104,7 @@ html {
   color: var(--clr-white);
 }
 
-.shifter [type=text] {
+.shifter [type='text'] {
   width: calc(100% - 60px);
   height: 40px;
   background-color: transparent;
@@ -126,45 +121,41 @@ html {
 }
 
 .shifter progress,
-.shifter [type="range"] {
+.shifter [type='range'] {
   width: 100%;
 }
 
 .shifter label {
   display: inline-block;
   width: 100%;
-	border-radius: 6px;
+  border-radius: 6px;
   background: var(--clr-slave);
   text-align: center;
 }
 
-
-
-.shifter [type=range] {
+.shifter [type='range'] {
   height: 19px;
   /* overflow: visible; */
-	border-radius: 6px;
+  border-radius: 6px;
   /* background: transparent; */
   background: var(--clr-slave);
 }
-.shifter [type=range]::-webkit-slider-thumb {
-	width: 19px;
-	height: 19px;
+.shifter [type='range']::-webkit-slider-thumb {
+  width: 19px;
+  height: 19px;
   border: none;
-	border-radius: 50%;
-	background: var(--clr-white);
-	cursor: pointer;
+  border-radius: 50%;
+  background: var(--clr-white);
+  cursor: pointer;
 }
-.shifter [type=range]::-moz-range-thumb {
-	width: 19px;
-	height: 19px;
+.shifter [type='range']::-moz-range-thumb {
+  width: 19px;
+  height: 19px;
   border: none;
-	border-radius: 50%;
-	background: var(--clr-white);
-	cursor: pointer;
+  border-radius: 50%;
+  background: var(--clr-white);
+  cursor: pointer;
 }
-
-
 
 .shifter progress {
   height: 16px;
@@ -185,20 +176,63 @@ html {
 .shifter progress {
   vertical-align: bottom;
   transform: translateY(50%);
-  clip-path: polygon(
-    0% 0%,
-    100% 0%,
-    100% 50%,
-    0% 50%
-  );
+  clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
 }
 .shifter progress ~ progress {
   vertical-align: top;
   transform: translateY(-50%);
-  clip-path: polygon(
-    0% 50%,
-    100% 50%,
-    100% 100%,
-    0% 100%
-  );
+  clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
+}
+.add_shifter {
+  width: 300px;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 20px;
+  background: linear-gradient(45deg, var(--clr-slave), var(--clr-master));
+  color: var(--clr-white);
+  text-align: center;
+}
+
+.add_shifter label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.add_shifter input {
+  width: calc(100% - 40px);
+  height: 40px;
+  margin-bottom: 15px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--clr-slave);
+  color: var(--clr-white);
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.add_shifter button {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--clr-master);
+  color: var(--clr-white);
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add_shifter button:hover {
+  background-color: var(--clr-slave);
+}
+
+.add_shifter input:focus,
+.add_shifter button:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--clr-white);
 }

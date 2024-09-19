@@ -17,9 +17,6 @@
 
         <div class="field_button">
           <input type="button" value="Set USD" />
-          <select id="cryptoSelect">
-            <option value="">Select a cryptocurrency</option>
-          </select>
         </div>
         <hr />
       </div>
@@ -102,6 +99,13 @@
             max="0"
             value="0"
           />
+        </div>
+
+        <div class="add_shifter">
+          <label for="new_shifter_add"> Shifter Name </label>
+          <input type="text" id="newshifter" list="newshifter" />
+          <datalist id="newshifter"></datalist>
+          <button class="new_shifter">Add new Shifter</button>
         </div>
       </div>
     </div>
