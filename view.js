@@ -155,16 +155,16 @@ function renderCryptoShifterDelite(e) {
 /////////////////////
 
 // cryptos = ['btc', 'ltc']
-function renderCryptoSelect(cryptos) {
-  const elSelect = document.querySelector('#cryptoSelect')
+function renderCryptoDatalist(cryptos) {
+  const elDatalist = document.querySelector('#cryptosList')
   cryptos.forEach(cryptoName => {
     const elOption = generateOption(cryptoName)
-    elSelect.appendChild(elOption)
+    elDatalist.appendChild(elOption)
   })
 }
 
 function generateOption(cryptoName) {
   const elOption = document.createElement('option')
-  elOption.value = cryptoName.toLowerCase()
-  elOption.textContent = cryptoName.toUpperCase()
+  elOption.value = cryptoName.toUpperCase()
+  return elOption
 }
