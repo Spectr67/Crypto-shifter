@@ -236,3 +236,8 @@ html {
   outline: none;
   box-shadow: 0 0 5px var(--clr-white);
 }
+.value_span {
+  width: 100%;
+  display: block;
+  text-align: center;
+}

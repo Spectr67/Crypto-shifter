@@ -60,8 +60,7 @@ function remouteDownloadingCrypto(cryptos) {
 
 function handleAddNewShifter() {
   const cryptoName = renderNewCryptoShifter()
-  if (cryptoName && modelCryptos.avaibleCoins.includes(cryptoName)) {
-    renderCryptoShifter(cryptoName)
-    modelCryptos.addCrypto(cryptoName)
-  }
+  getCryptoPrice(crypto)
+  renderCryptoShifter(cryptoName)
+  modelCryptos.addCrypto(cryptoName)
 }

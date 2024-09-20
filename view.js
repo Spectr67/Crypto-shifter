@@ -87,7 +87,13 @@ function generateShifter(cryptoName) {
   const elProgressBot = document.createElement('progress')
   const elInputRange = document.createElement('input')
   const elButtonDelete = document.createElement('button')
+  const elSpanValueTokens = document.createElement('span')
 
+  elSpanValueTokens.textContent = 'test'
+
+  /////////////////
+  elSpanValueTokens.setAttribute('class', 'value_span')
+  ////////////////////
   elDivShifter.setAttribute('class', 'shifter')
 
   elLabel.setAttribute('for', `edit-${cryptoName}`)
@@ -137,6 +143,7 @@ function generateShifter(cryptoName) {
   elDivRow.appendChild(elButtonPlus)
   elDivShifter.appendChild(elProgressBot)
   elDivShifter.appendChild(elInputRange)
+  elDivShifter.appendChild(elSpanValueTokens)
   elDivShifter.appendChild(elButtonDelete)
 
   return elDivShifter
