@@ -22,13 +22,11 @@ async function getCryptoPrice(crypto) {
 }
 
 async function getAvailableCryptos() {
-  const data = await sendRequest(urlCryptoNamesList)
-  return Object.keys(data.Data).map(d => d.toLowerCase())
+  const CryptoData = await sendRequest(urlCryptoNamesList)
+  return Object.keys(CryptoData.Data)
 }
 
 async function initCryptoDropdown() {
   const cryptos = await getAvailableCryptos()
-  renderCryptoDatalist(cryptos)
-  const dropdown = document.getElementById('newshifter')
-  dropdown.addEventListener('input', handleCryptoDataList)
+  remouteDownloadingCrypto(cryptos)
 }

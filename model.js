@@ -1,5 +1,6 @@
-const cryptos = {
+const modelCryptos = {
   totalUSD: 0,
+  avaibleCoins: [],
   coins: {
     btc: {
       tokens: 0,
@@ -70,10 +71,14 @@ const cryptos = {
   },
 
   addCrypto(crypto) {
-    if (!this.coins[crypto]) {
-      this.coins[crypto] = { value: 0, max: 0 }
+    if (this.avaibleCoins.includes(crypto)) {
+      if (!this.coins[crypto]) {
+        this.coins[crypto] = { value: 0, max: 0 }
+        this.setNotMe()
+      } else {
+        return
+      }
     }
-    this.setNotMe()
   },
 
   removeCrypto(crypto) {
@@ -86,7 +91,19 @@ const cryptos = {
   calcTokens(crypto, cur) {
     this.coins[crypto].tokens = cur / this.coins[crypto].value
   },
+
+  setAvaibleCoins(cryptos) {
+    this.avaibleCoins = cryptos
+  },
 }
+
+// const lalal = [
+//   { id: 28328, symbol: "1ST", partner_symbol: "1ST", data_available_from: 1481241600 },
+//   { id: 28329, symbol: "BTC", partner_symbol: "BTC", data_available_from: 1481241601 }
+// ]
+// modelCryptos.setAvaibleCoins(lalal)
+// console.log(modelCryptos.avaibleCoins)
+
 // cryptos.setMax(40000,"btc")
 // cryptos.setValue(40000, 'btc')
 // cryptos.calcTokens("btc", 56000)

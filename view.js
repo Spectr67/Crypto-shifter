@@ -91,7 +91,7 @@ function generateShifter(cryptoName) {
   elDivShifter.setAttribute('class', 'shifter')
 
   elLabel.setAttribute('for', `edit-${cryptoName}`)
-  elLabel.textContent = `USD to ${cryptoName}`
+  elLabel.textContent = `USD to ${cryptoName.toUpperCase()}`
 
   elProgressTop.setAttribute('ctrl', cryptoName)
   elProgressTop.setAttribute('max', '1000')
@@ -167,4 +167,13 @@ function generateOption(cryptoName) {
   const elOption = document.createElement('option')
   elOption.value = cryptoName.toUpperCase()
   return elOption
+}
+///////////////////////////
+const elButtonAddNewShifter = document.querySelector('.new_shifter')
+elButtonAddNewShifter.onclick = handleAddNewShifter
+
+function renderNewCryptoShifter() {
+  const elInputNewShifter = document.querySelector('#newshifterInput')
+  const cryptoName = elInputNewShifter.value
+  return cryptoName
 }

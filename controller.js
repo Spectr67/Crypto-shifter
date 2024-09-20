@@ -1,35 +1,67 @@
 function handleSetTotalUSD(total) {
-  cryptos.setTotal(total)
-  Object.keys(cryptos.coins).forEach(crypto => {
-    renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
+  modelCryptos.setTotal(total)
+  Object.keys(modelCryptos.coins).forEach(crypto => {
+    renderCrypto(
+      modelCryptos.coins[crypto].value,
+      modelCryptos.coins[crypto].max,
+      crypto
+    )
   })
 }
 function handleInputInputUsd(value, crypto) {
-  cryptos.setValue(value, crypto)
-  renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
+  modelCryptos.setValue(value, crypto)
+  renderCrypto(
+    modelCryptos.coins[crypto].value,
+    modelCryptos.coins[crypto].max,
+    crypto
+  )
 }
 function handleMinusButton(crypto) {
-  cryptos.minusOne(crypto)
-  renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
+  modelCryptos.minusOne(crypto)
+  renderCrypto(
+    modelCryptos.coins[crypto].value,
+    modelCryptos.coins[crypto].max,
+    crypto
+  )
 }
 function handlePlusButton(crypto) {
-  cryptos.plusOne(crypto)
-  renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
+  modelCryptos.plusOne(crypto)
+  renderCrypto(
+    modelCryptos.coins[crypto].value,
+    modelCryptos.coins[crypto].max,
+    crypto
+  )
 }
 function handleRangeInput(value, crypto) {
-  if (value <= cryptos.coins[crypto].max) {
-    cryptos.setValue(value, crypto)
-    renderCrypto(cryptos.coins[crypto].value, cryptos.coins[crypto].max, crypto)
+  if (value <= modelCryptos.coins[crypto].max) {
+    modelCryptos.setValue(value, crypto)
+    renderCrypto(
+      modelCryptos.coins[crypto].value,
+      modelCryptos.coins[crypto].max,
+      crypto
+    )
   }
 }
 function handleRemoveShifter(e, crypto) {
   renderCryptoShifterDelite(e)
-  cryptos.removeCrypto(crypto)
+  modelCryptos.removeCrypto(crypto)
 }
 function handleCryptoDataList(e) {
   const cryptoName = e.target.value
   if (cryptoName) {
     renderCryptoShifter(cryptoName)
-    cryptos.addCrypto(cryptoName)
+    modelCryptos.addCrypto(cryptoName)
+  }
+}
+function remouteDownloadingCrypto(cryptos) {
+  modelCryptos.setAvaibleCoins(cryptos)
+  renderCryptoDatalist(cryptos)
+}
+
+function handleAddNewShifter() {
+  const cryptoName = renderNewCryptoShifter()
+  if (cryptoName && modelCryptos.avaibleCoins.includes(cryptoName)) {
+    renderCryptoShifter(cryptoName)
+    modelCryptos.addCrypto(cryptoName)
   }
 }
