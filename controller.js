@@ -58,9 +58,11 @@ function remouteDownloadingCrypto(cryptos) {
   renderCryptoDatalist(cryptos)
 }
 
-function handleAddNewShifter() {
-  const cryptoName = renderNewCryptoShifter()
-  getCryptoPrice(cryptoName)
-  renderCryptoShifter(cryptoName)
+async function handleAddNewShifter(cryptoName) {
   modelCryptos.addCrypto(cryptoName)
+  const priceUsdForOneToken = await getCryptoPrice(cryptoName)
+  modelCryptos.calcTokens(cryptoName, priceUsdForOneToken)
+  console.log(priceUsdForOneToken)
+  console.log(modelCryptos.coins[cryptoName])
+  renderCryptoShifter(cryptoName)
 }

@@ -89,7 +89,7 @@ const modelCryptos = {
   },
 
   calcTokens(crypto, cur) {
-    this.coins[crypto].tokens = cur / this.coins[crypto].value
+    this.coins[crypto].tokens = this.coins[crypto].value / cur
   },
 
   setAvaibleCoins(cryptos) {

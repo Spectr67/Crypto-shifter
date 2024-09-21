@@ -177,10 +177,10 @@ function generateOption(cryptoName) {
 }
 ///////////////////////////
 const elButtonAddNewShifter = document.querySelector('.new_shifter')
-elButtonAddNewShifter.onclick = handleAddNewShifter
+elButtonAddNewShifter.onclick = onClickAddNewShifter
 
-function renderNewCryptoShifter() {
+function onClickAddNewShifter() {
   const elInputNewShifter = document.querySelector('#newshifterInput')
   const cryptoName = elInputNewShifter.value
-  return cryptoName
+  handleAddNewShifter(cryptoName)
 }

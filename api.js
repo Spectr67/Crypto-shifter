@@ -15,10 +15,10 @@ async function sendRequest(url) {
   return data
 }
 
-async function getCryptoPrice(crypto) {
-  const url = urlCryptoPrice(crypto)
+async function getCryptoPrice(cryptoName) {
+  const url = urlCryptoPrice(cryptoName)
   const data = await sendRequest(url)
-  return data
+  return data.USD
 }
 
 async function getAvailableCryptos() {
