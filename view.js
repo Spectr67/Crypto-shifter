@@ -89,7 +89,9 @@ function generateShifter(cryptoName) {
   const elButtonDelete = document.createElement('button')
   const elSpanValueTokens = document.createElement('span')
 
-  elSpanValueTokens.textContent = 'test'
+  elSpanValueTokens.textContent = ''
+  elSpanValueTokens.setAttribute('class', 'value_span')
+  elSpanValueTokens.setAttribute('ctrl', cryptoName)
 
   /////////////////
   elSpanValueTokens.setAttribute('class', 'value_span')
@@ -132,6 +134,11 @@ function generateShifter(cryptoName) {
   elButtonDelete.setAttribute('ctrl', cryptoName)
   elButtonDelete.setAttribute('action', 'delete')
   elButtonDelete.textContent = 'Delete'
+
+  elButtonMinus.onclick = onClickMinusButton
+  elButtonPlus.onclick = onClickPlusButton
+  elInput.oninput = onInputInputText
+  elInputRange.oninput = onChangeRangeInput
 
   elButtonDelete.onclick = e => handleRemoveShifter(e, cryptoName)
 
@@ -184,3 +191,12 @@ function onClickAddNewShifter() {
   const cryptoName = elInputNewShifter.value
   handleAddNewShifter(cryptoName)
 }
+
+function renderCryptoTokens(crypto, tokens) {
+  const elSpan = document.querySelector(`span[ctrl="${crypto}"]`)
+  elSpan.textContent = `Tokens: ${tokens}`
+}
+
+document.querySelectorAll('.shifter input[type="text"]').forEach(elInput => {
+  elInput.oninput = handleInputValueChange
+})

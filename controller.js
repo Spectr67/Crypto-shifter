@@ -62,7 +62,15 @@ async function handleAddNewShifter(cryptoName) {
   modelCryptos.addCrypto(cryptoName)
   const priceUsdForOneToken = await getCryptoPrice(cryptoName)
   modelCryptos.calcTokens(cryptoName, priceUsdForOneToken)
-  console.log(priceUsdForOneToken)
-  console.log(modelCryptos.coins[cryptoName])
   renderCryptoShifter(cryptoName)
+}
+
+async function handleInputValueChange(e) {
+  const crypto = e.target.getAttribute('ctrl')
+  const value = parseFloat(e.target.value)
+  modelCryptos.setValue(value, crypto)
+  const priceUsdForOneToken = await getCryptoPrice(crypto)
+  modelCryptos.calcTokens(crypto, priceUsdForOneToken)
+  const tokens = modelCryptos.getTokens(crypto)
+  renderCryptoTokens(crypto, tokens)
 }

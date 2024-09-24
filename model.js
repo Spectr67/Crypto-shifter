@@ -71,9 +71,12 @@ const modelCryptos = {
   },
 
   addCrypto(crypto) {
+    if (this.coins[crypto]) {
+      return
+    }
     if (this.avaibleCoins.includes(crypto)) {
       if (!this.coins[crypto]) {
-        this.coins[crypto] = { value: 0, max: 0 }
+        this.coins[crypto] = { value: 0, max: 0, tokens: 0 }
         this.setNotMe()
       } else {
         return
@@ -94,6 +97,10 @@ const modelCryptos = {
 
   setAvaibleCoins(cryptos) {
     this.avaibleCoins = cryptos
+  },
+
+  getTokens(crypto) {
+    return this.coins[crypto].tokens.toFixed()
   },
 }
 
