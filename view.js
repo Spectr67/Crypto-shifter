@@ -3,6 +3,7 @@ const listInputTexts = document.querySelectorAll('.shifter [type="text"]')
 const listButtonsMinus = document.querySelectorAll('.shifter [action="minus"]')
 const listButtonsPlus = document.querySelectorAll('.shifter [action="plus"]')
 const listRangeInput = document.querySelectorAll('.shifter [type="range"]')
+const elButtonAddNewShifter = document.querySelector('.new_shifter')
 
 listInputTexts.forEach(elInputText => {
   elInputText.oninput = onInputInputText
@@ -21,6 +22,7 @@ listRangeInput.forEach(elInputRange => {
 })
 
 elButtonSetUSD.onclick = onClickSetTotalUSD
+elButtonAddNewShifter.onclick = onClickAddNewShifter
 
 function onClickSetTotalUSD() {
   const elInputTotalBalance = document.querySelector('#total_balance')
@@ -50,10 +52,11 @@ function onChangeRangeInput(e) {
   handleRangeInput(value, crypto)
 }
 
-function renderCrypto(value, max, crypto) {
+function renderCrypto(value, max, crypto, tokens) {
   renderInputText(value, crypto)
   renderInputRange(value, max, crypto)
   renderProgress(value, max, crypto)
+  renderCryptoTokens(crypto, tokens)
 }
 
 function renderInputText(value, crypto) {
@@ -75,85 +78,9 @@ function renderInputRange(value, max, crypto) {
   elRange.value = value
 }
 
-////////////////////////////
-function generateShifter(cryptoName) {
-  const elDivShifter = document.createElement('div')
-  const elLabel = document.createElement('label')
-  const elProgressTop = document.createElement('progress')
-  const elDivRow = document.createElement('div')
-  const elButtonMinus = document.createElement('button')
-  const elInput = document.createElement('input')
-  const elButtonPlus = document.createElement('button')
-  const elProgressBot = document.createElement('progress')
-  const elInputRange = document.createElement('input')
-  const elButtonDelete = document.createElement('button')
-  const elSpanValueTokens = document.createElement('span')
-
-  elSpanValueTokens.textContent = ''
-  elSpanValueTokens.setAttribute('class', 'value_span')
-  elSpanValueTokens.setAttribute('ctrl', cryptoName)
-
-  /////////////////
-  elSpanValueTokens.setAttribute('class', 'value_span')
-  ////////////////////
-  elDivShifter.setAttribute('class', 'shifter')
-
-  elLabel.setAttribute('for', `edit-${cryptoName}`)
-  elLabel.textContent = `USD to ${cryptoName.toUpperCase()}`
-
-  elProgressTop.setAttribute('ctrl', cryptoName)
-  elProgressTop.setAttribute('max', '1000')
-  elProgressTop.setAttribute('value', '0')
-
-  elDivRow.setAttribute('class', 'row')
-
-  elButtonMinus.setAttribute('ctrl', cryptoName)
-  elButtonMinus.setAttribute('action', 'minus')
-  elButtonMinus.innerHTML = '&lt;'
-
-  elInput.setAttribute('type', 'text')
-  elInput.setAttribute('ctrl', cryptoName)
-  elInput.setAttribute('name', `edit-${cryptoName}`)
-  elInput.setAttribute('id', `edit-${cryptoName}`)
-
-  elButtonPlus.setAttribute('ctrl', cryptoName)
-  elButtonPlus.setAttribute('action', 'plus')
-  elButtonPlus.innerHTML = '&gt;'
-
-  elProgressBot.setAttribute('ctrl', cryptoName)
-  elProgressBot.setAttribute('max', '1000')
-  elProgressBot.setAttribute('value', '0')
-
-  elInputRange.setAttribute('type', 'range')
-  elInputRange.setAttribute('ctrl', cryptoName)
-  elInputRange.setAttribute('name', cryptoName)
-  elInputRange.setAttribute('min', '0')
-  elInputRange.setAttribute('max', '1000')
-  elInputRange.setAttribute('value', '0')
-
-  elButtonDelete.setAttribute('ctrl', cryptoName)
-  elButtonDelete.setAttribute('action', 'delete')
-  elButtonDelete.textContent = 'Delete'
-
-  elButtonMinus.onclick = onClickMinusButton
-  elButtonPlus.onclick = onClickPlusButton
-  elInput.oninput = onInputInputText
-  elInputRange.oninput = onChangeRangeInput
-
-  elButtonDelete.onclick = e => handleRemoveShifter(e, cryptoName)
-
-  elDivShifter.appendChild(elLabel)
-  elDivShifter.appendChild(elProgressTop)
-  elDivShifter.appendChild(elDivRow)
-  elDivRow.appendChild(elButtonMinus)
-  elDivRow.appendChild(elInput)
-  elDivRow.appendChild(elButtonPlus)
-  elDivShifter.appendChild(elProgressBot)
-  elDivShifter.appendChild(elInputRange)
-  elDivShifter.appendChild(elSpanValueTokens)
-  elDivShifter.appendChild(elButtonDelete)
-
-  return elDivShifter
+function renderCryptoTokens(crypto, tokens) {
+  const elSpan = document.querySelector(`span[ctrl="${crypto}"]`)
+  elSpan.textContent = `Tokens: ${tokens}`
 }
 
 function renderCryptoShifter(cryptoName) {
@@ -166,37 +93,17 @@ function renderCryptoShifterDelite(e) {
   const elDivShifter = e.target.parentElement
   elDivShifter.remove()
 }
-/////////////////////
 
 function renderCryptoDatalist(cryptos) {
   const elDatalist = document.querySelector('#newshifter')
-  console.log(elDatalist)
   cryptos.forEach(cryptoName => {
     const elOption = generateOption(cryptoName)
     elDatalist.appendChild(elOption)
   })
 }
 
-function generateOption(cryptoName) {
-  const elOption = document.createElement('option')
-  elOption.value = cryptoName.toUpperCase()
-  return elOption
-}
-///////////////////////////
-const elButtonAddNewShifter = document.querySelector('.new_shifter')
-elButtonAddNewShifter.onclick = onClickAddNewShifter
-
 function onClickAddNewShifter() {
   const elInputNewShifter = document.querySelector('#newshifterInput')
   const cryptoName = elInputNewShifter.value
   handleAddNewShifter(cryptoName)
 }
-
-function renderCryptoTokens(crypto, tokens) {
-  const elSpan = document.querySelector(`span[ctrl="${crypto}"]`)
-  elSpan.textContent = `Tokens: ${tokens}`
-}
-
-document.querySelectorAll('.shifter input[type="text"]').forEach(elInput => {
-  elInput.oninput = handleInputValueChange
-})

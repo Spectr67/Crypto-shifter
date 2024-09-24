@@ -6,21 +6,25 @@ const modelCryptos = {
       tokens: 0,
       value: 0,
       max: 0,
+      cur: 0,
     },
     etc: {
       tokens: 0,
       value: 0,
       max: 0,
+      cur: 0,
     },
     ltc: {
       tokens: 0,
       value: 0,
       max: 0,
+      cur: 0,
     },
     doge: {
       tokens: 0,
       value: 0,
       max: 0,
+      cur: 0,
     },
   },
 
@@ -58,6 +62,7 @@ const modelCryptos = {
     for (const key in this.coins) {
       if (key === crypto) continue
       this.coins[key].max = this.totalUSD - sumVal + this.coins[key].value
+      console.log(key, this.coins[key].max)
     }
   },
 
@@ -91,17 +96,17 @@ const modelCryptos = {
     this.setNotMe()
   },
 
-  calcTokens(crypto, cur) {
-    this.coins[crypto].tokens = this.coins[crypto].value / cur
+  calcTokens(crypt) {
+    this.coins[crypt].tokens = this.coins[crypt].value / this.coins[crypt].cur
   },
 
   setAvaibleCoins(cryptos) {
     this.avaibleCoins = cryptos
   },
 
-  getTokens(crypto) {
-    return this.coins[crypto].tokens.toFixed()
-  },
+  // getTokens(crypto) {
+  //   return this.coins[crypto].tokens.toFixed()
+  // },
 }
 
 // const lalal = [
