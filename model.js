@@ -38,10 +38,12 @@ const modelCryptos = {
 
   minusOne(crypto) {
     this.setValue(this.getValue(crypto) - 1, crypto)
+    this.calcTokens(crypto)
   },
 
   plusOne(crypto) {
     this.setValue(this.getValue(crypto) + 1, crypto)
+    this.calcTokens(crypto)
   },
 
   getValue(crypto) {
@@ -64,6 +66,7 @@ const modelCryptos = {
       this.coins[key].max = this.totalUSD - sumVal + this.coins[key].value
       console.log(key, this.coins[key].max)
     }
+    this.calcTokens(crypto)
   },
 
   setMax(max, crypto) {
@@ -97,7 +100,9 @@ const modelCryptos = {
   },
 
   calcTokens(crypt) {
-    this.coins[crypt].tokens = this.coins[crypt].value / this.coins[crypt].cur
+    this.coins[crypt].tokens = (
+      this.coins[crypt].value / this.coins[crypt].cur
+    ).toFixed(5)
   },
 
   setAvaibleCoins(cryptos) {
